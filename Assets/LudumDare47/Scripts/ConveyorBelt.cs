@@ -27,7 +27,7 @@ public class ConveyorBelt : MonoBehaviour
 
     private void Awake()
     {
-        speed = ConveyorMaterial.GetFloat(SpeedMatProp);
+        SetSpeed(speed);
 
         ValidateVariables();
         if (hitTransform == null)
@@ -85,7 +85,7 @@ public class ConveyorBelt : MonoBehaviour
     }
 
     [Button()]
-    private void AddTextObject()
+    private void AddTestObject()
     {
         var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
         AttachObject(obj);
