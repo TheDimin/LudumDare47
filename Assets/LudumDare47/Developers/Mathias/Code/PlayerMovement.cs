@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using Tools.StateManager;
 using UnityEngine;
 
 namespace ld47
@@ -6,66 +7,43 @@ namespace ld47
 	[RequireComponent(typeof(Rigidbody))]
 	public class PlayerMovement : MonoBehaviour
 	{
-		private bool IsGrounded => Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f);
+		
+		private StateManagerBase<PlayerState> stateManager = new StateManagerBase<PlayerState>();
 
 		[SerializeField] float movementSpeed;
+		public float MovementSpeed => movementSpeed;
 		[SerializeField] private float lookSpeed;
+		public float LookSpeed => lookSpeed;
 		[SerializeField] private float jumpForce;
+		public float JumpForce => jumpForce;
 
-		private Rigidbody playerbody = null;
+		private bool canMove = true;
+		public Rigidbody Playerbody { get; private set; } = null;
 		private Collider playerCollider = null;
-		private Transform cameraTransform = null;
-		private float distanceToGround = 0;
-		private float xRotation = 0.0f;
+		public float DistanceToGround { get; private set; } = 0;
 
 		private void Awake()
 		{
-			playerbody = GetComponent<Rigidbody>();
+			Playerbody = GetComponent<Rigidbody>();
 			playerCollider = GetComponent<Collider>();
-			cameraTransform = GetComponentInChildren<CinemachineVirtualCamera>().transform;
-			distanceToGround = playerCollider.bounds.extents.y;
+			DistanceToGround = playerCollider.bounds.extents.y;
 
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
+
+			stateManager.RegisterState(new MovementState(this));
 		}
 
 		private void Update()
 		{
-			Rotate();
-			Walk();
+			stateManager.Update();
 		}
 
 		private void FixedUpdate()
 		{
-			Jump();
-		}
+			stateManager.FixedUpdate();
+		}	
 
-		private void Rotate()
-		{
-			if (GameManager.Instance.CurrentMouseVisibility != GameManager.MouseVisibility.Hidden)
-			{
-				return;
-			}
-
-			transform.Rotate(Vector3.up * lookSpeed * Input.GetAxis("Mouse X") * Time.deltaTime);
-
-			xRotation -= Input.GetAxis("Mouse Y") * lookSpeed * Time.deltaTime;
-			xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
-			cameraTransform.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
-		}
-
-		private void Walk()
-		{
-			Vector3 movement = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-			transform.position += movement * movementSpeed * Time.deltaTime;
-		}
-
-		private void Jump()
-		{
-			if (Input.GetAxis("Jump") > 0 && IsGrounded)
-			{
-				playerbody.AddForce(Vector3.up * jumpForce * Time.deltaTime, ForceMode.Impulse);
-			}
-		}
+		public void ToggleMove(bool active) => canMove = active;
 	}
 }

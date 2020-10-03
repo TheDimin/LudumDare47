@@ -44,5 +44,7 @@ namespace Tools.StateManager
         /// (Make sure to call this function from the monobehaviour that owns the statemanager)
         /// </summary>
         public virtual void Update() { }
+
+        public virtual void FixedUpdate() { }
     }
 }

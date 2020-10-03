@@ -1,12 +1,11 @@
 ﻿using JimTheKiwifruit;
+using Tools.StateManager;
 using UnityEngine;
 
 namespace ld47
 {
 	public class GameManager : Singleton<GameManager>
 	{
-
-
 		public enum MouseVisibility
 		{
 			Hidden,
@@ -15,6 +14,8 @@ namespace ld47
 
 		public MouseVisibility CurrentMouseVisibility { get; private set; } = MouseVisibility.Hidden;
 
+		public StateManagerBase<StateBase> StateManager { get; private set; } = new StateManagerBase<StateBase>();
+
 		protected override void Awake()
 		{
 			base.Awake();
@@ -22,6 +23,8 @@ namespace ld47
 
 		private void Update()
 		{
+			//StateManager.Update();
+
 			if (Input.GetKeyDown(KeyCode.Escape)) SetMouseVisability(MouseVisibility.Visible);
 			if (Input.GetMouseButtonDown(0)) SetMouseVisability(MouseVisibility.Hidden); //TODO: Check for UI state.
 		}

@@ -95,6 +95,14 @@ namespace Tools.StateManager
             }
         }
 
+        public virtual void FixedUpdate()
+		{
+            if (currentState != null)
+			{
+                currentState.FixedUpdate();
+			}
+		}
+
         /// <summary>
         /// Adds a new state to the statemanager
         /// </summary>
