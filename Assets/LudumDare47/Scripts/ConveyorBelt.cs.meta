@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9965cf8c3c5304d4888fc6ae4dc9f475
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ConveyorBeltObject: {fileID: 7446213886138392227, guid: 8c7c029f19171e847bac9893e8feb410,
+      type: 3}
+  - ConveyorMaterial: {fileID: 2100000, guid: f5db59af7720f3a49b182cdb8a5baec0, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
