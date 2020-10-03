@@ -1,10 +1,47 @@
 ﻿using JimTheKiwifruit;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+namespace ld47
 {
-	protected override void Awake()
+	public class GameManager : Singleton<GameManager>
 	{
-		base.Awake();
+
+
+		public enum MouseVisibility
+		{
+			Hidden,
+			Visible
+		};
+
+		public MouseVisibility CurrentMouseVisibility { get; private set; } = MouseVisibility.Hidden;
+
+		protected override void Awake()
+		{
+			base.Awake();
+		}
+
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape)) SetMouseVisability(MouseVisibility.Visible);
+			if (Input.GetMouseButtonDown(0)) SetMouseVisability(MouseVisibility.Hidden); //TODO: Check for UI state.
+		}
+
+		public void SetMouseVisability(MouseVisibility mouseVisibility)
+		{
+			switch (mouseVisibility)
+			{
+				case MouseVisibility.Hidden:
+					CurrentMouseVisibility = MouseVisibility.Hidden;
+					Cursor.lockState = CursorLockMode.Locked;
+					Cursor.visible = false;
+					break;
+
+				case MouseVisibility.Visible:
+					CurrentMouseVisibility = MouseVisibility.Visible;
+					Cursor.lockState = CursorLockMode.None;
+					Cursor.visible = true;
+					break;
+			}
+		}
 	}
 }
