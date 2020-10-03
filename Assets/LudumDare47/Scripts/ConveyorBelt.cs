@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
@@ -14,17 +13,82 @@ public class ConveyorBelt : MonoBehaviour
     private GameObject BoxA;
     private GameObject BoxB;
 
-    private List<GameObject> conveyorInstances;
+    [SerializeField, HideInInspector] private List<GameObject> conveyorInstances;
+
+    [SerializeField, HideInInspector] private Transform hitTransform;
+    private float hitLocation;
 
     private List<GameObject> attachedObjects = new List<GameObject>();
+    public Transform AttachPoint { get; set; }
+    public Transform WrapAroundLocation { get; set; }
+    private Transform conveyorHolder;
+    private static readonly int SpeedMatProp = Shader.PropertyToID("Vector1_EA6D7116");
     public float speed { get; private set; } = 1;
+
+    private void Awake()
+    {
+        speed = ConveyorMaterial.GetFloat(SpeedMatProp);
+
+        ValidateVariables();
+        if (hitTransform == null)
+        {
+            hitTransform = transform.Find("HitLocation");
+
+            Debug.Assert(hitTransform, "Failed to find HitLocation in child objects");
+        }
+
+        hitLocation = hitTransform.localPosition.z;
+    }
 
     private void Update()
     {
+        UpdateObjectLocations();
+    }
+
+    private void UpdateObjectLocations(bool checkForPause = true)
+    {
+        List<GameObject> MarkedForRemove = new List<GameObject>();
         foreach (var attachedObj in attachedObjects)
         {
+
+            if (attachedObj.transform.parent != transform)
+            {
+                MarkedForRemove.Add(attachedObj);
+                continue;
+            }
+
             attachedObj.transform.localPosition += Vector3.forward * (speed * Time.deltaTime);
+
+            if (Math.Abs(attachedObj.transform.localPosition.z - hitLocation) < (speed * Time.deltaTime) * .5f)
+            {
+                SetSpeed(0);
+            }
+
+            if (Vector3.Distance(attachedObj.transform.localPosition, WrapAroundLocation.localPosition) < .5f)
+            {
+                //reataching would fuck up list ordering
+                attachedObj.transform.localPosition = AttachPoint.localPosition;
+            }
         }
+
+        foreach (var markedRemoveObj in MarkedForRemove)
+        {
+            attachedObjects.Remove(markedRemoveObj);
+        }
+    }
+
+    [Button()]
+    private void SetSpeed()
+    {
+        SetSpeed(1);
+        SetSpeed(1);
+    }
+
+    [Button()]
+    private void AddTextObject()
+    {
+        var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        AttachObject(obj);
     }
 
     [Button("SetConveyorBelts")]
@@ -32,27 +96,21 @@ public class ConveyorBelt : MonoBehaviour
     {
         ValidateVariables();
 
-        var distance = BoxB.transform.position.z - BoxA.transform.position.z;
+        var distance = (BoxB.transform.position - BoxA.transform.position).magnitude;
 
         foreach (var instance in conveyorInstances)
         {
-            DestroyImmediate(instance, false);
+            DestroyImmediate(instance, true);
         }
 
         conveyorInstances.Clear();
-        Transform conveyorHolder = transform.Find("Conveyors");
-        if (conveyorHolder == null)
-        {
-            conveyorHolder = new GameObject("Conveyors").transform;
-            conveyorHolder.SetParent(transform);
-            conveyorHolder.localPosition = Vector3.zero;
-        }
+
 
         var boxApos = BoxA.transform.position;
 
-        var width = ConveyorBeltObject.GetComponent<MeshRenderer>().bounds.extents.z * 2;
+        var width = ConveyorBeltObject.GetComponent<MeshRenderer>().bounds.extents.z * 2f;
 
-        var amount = distance - width - 1;
+        var amount = distance / width;
 
         for (int i = 0; i < amount; i++)
         {
@@ -62,19 +120,32 @@ public class ConveyorBelt : MonoBehaviour
 
     private void ValidateVariables()
     {
-        if (BoxA != transform.Find("ConveyorBoxA"))
+        if (BoxA != transform.Find("ConveyorBoxA").gameObject)
         {
             var boxATrans = transform.Find("ConveyorBoxA");
             Debug.Assert(boxATrans, "Failed to find 'ConveyorBoxA' in" + this.ToString());
             BoxA = boxATrans.gameObject;
         }
 
-        if (BoxB != transform.Find("ConveyorBoxB"))
+        if (BoxB != transform.Find("ConveyorBoxB").gameObject)
         {
             var boxBTrans = transform.Find("ConveyorBoxB");
             Debug.Assert(boxBTrans, "Failed to find 'ConveyorBoxB' in" + this.ToString());
             BoxB = boxBTrans.gameObject;
         }
+
+        conveyorHolder = transform.Find("Conveyors");
+        if (conveyorHolder == null)
+        {
+            conveyorHolder = new GameObject("Conveyors").transform;
+            conveyorHolder.SetParent(transform);
+        }
+        Debug.Assert(conveyorHolder, "conveyorHolder GameObject not found");
+
+        WrapAroundLocation = transform.Find("WrapAround");
+        Debug.Assert(WrapAroundLocation, "WrapAround not found");
+
+        AttachPoint = transform.Find("AttachPoint");
     }
 
     public void AttachObject(GameObject obj)
@@ -89,14 +160,26 @@ public class ConveyorBelt : MonoBehaviour
 
         attachedObjects.Add(obj);
         obj.transform.SetParent(transform);
-        obj.transform.localPosition = BoxA.transform.localPosition;
+        obj.transform.localPosition = AttachPoint.localPosition;
+    }
+
+    public void DetachObject(GameObject obj)
+    {
+        attachedObjects.Remove(obj);
+        obj.transform.SetParent(null);
     }
 
     public void SetSpeed(float newSpeed)
     {
+        if (Math.Abs(speed) < .1f)
+        {
+            foreach (var attachedObj in attachedObjects)
+            {
+                attachedObj.transform.localPosition += Vector3.forward * (speed * Time.deltaTime);
+            }
+        }
+
         speed = newSpeed;
-        ConveyorMaterial.SetFloat("Vector1_EA6D7116", speed);
+        ConveyorMaterial.SetFloat(SpeedMatProp, speed);
     }
-
-
 }
