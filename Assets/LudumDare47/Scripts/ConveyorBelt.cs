@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -7,13 +8,15 @@ using UnityEngine;
 public class ConveyorBelt : MonoBehaviour
 {
     [Header("Auto")]
-    [SerializeField] private GameObject ConveyorBeltObject;
-    [SerializeField] private Material ConveyorMaterial;
+    [SerializeField] private GameObject ConveyorBeltObject = null;
+    [SerializeField] private Material ConveyorMaterial = null;
 
     private GameObject BoxA;
+    private Cloth clothA;
     private GameObject BoxB;
+    private Cloth clothB;
 
-    [SerializeField, HideInInspector] private List<GameObject> conveyorInstances;
+    [SerializeField, HideInInspector] private List<GameObject> conveyorInstances = new List<GameObject>();
 
     [SerializeField, HideInInspector] private Transform hitTransform;
     private float hitLocation;
@@ -27,7 +30,7 @@ public class ConveyorBelt : MonoBehaviour
 
     private void Awake()
     {
-        SetSpeed(speed);
+        SetSpeed(speed);//
 
         ValidateVariables();
         if (hitTransform == null)
@@ -66,8 +69,12 @@ public class ConveyorBelt : MonoBehaviour
 
             if (Vector3.Distance(attachedObj.transform.localPosition, WrapAroundLocation.localPosition) < .5f)
             {
+                clothA.enabled = false;
+                clothB.enabled = false;
                 //reataching would fuck up list ordering
                 attachedObj.transform.localPosition = AttachPoint.localPosition;
+                clothA.enabled = true;
+                clothB.enabled = true;
             }
         }
 
@@ -84,10 +91,11 @@ public class ConveyorBelt : MonoBehaviour
         SetSpeed(1);
     }
 
+    [SerializeField] private GameObject spawnGameObject;
     [Button()]
     private void AddTestObject()
     {
-        var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        var obj = GameObject.Instantiate(spawnGameObject, Vector3.forward, Quaternion.identity);
         AttachObject(obj);
     }
 
@@ -158,9 +166,31 @@ public class ConveyorBelt : MonoBehaviour
             return;
         }
 
+        var sc = obj.AddComponent<SphereCollider>();
+        if (clothA == null)
+        {
+            clothA = BoxA.transform.GetComponentInChildren<Cloth>();
+        }
+        if (clothB == null)
+        {
+            clothB = BoxB.transform.GetComponentInChildren<Cloth>();
+        }
+
+
+
         attachedObjects.Add(obj);
         obj.transform.SetParent(transform);
         obj.transform.localPosition = AttachPoint.localPosition;
+
+        clothA.enabled = false;
+
+        var colliders = new ClothSphereColliderPair[1];
+        colliders[0] = new ClothSphereColliderPair(sc);
+
+        clothA.sphereColliders = colliders;
+        clothB.sphereColliders = colliders;
+
+        clothA.enabled = true;
     }
 
     public void DetachObject(GameObject obj)
