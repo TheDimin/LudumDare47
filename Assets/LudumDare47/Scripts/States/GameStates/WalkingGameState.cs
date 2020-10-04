@@ -9,22 +9,26 @@ namespace LD47.GameStates
     {
         public override void OnEnterState()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         public override void OnExitState()
         {
-            throw new System.NotImplementedException();
+          //  throw new System.NotImplementedException();
         }
 
         public override bool CanEnter(StateBase currentStateBase)
         {
-            throw new System.NotImplementedException();
+            if (currentStateBase.GetType() == typeof(PreGameState))
+                return true;
+
+
+            return false;
         }
 
         public override bool CanExit()
         {
-            throw new System.NotImplementedException();
+            return false;
         }
     }
 }
