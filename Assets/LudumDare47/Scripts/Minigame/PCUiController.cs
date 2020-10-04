@@ -27,10 +27,8 @@ namespace LD47
             [SerializeField]private Sprite[] sprites;
             
             private void Awake() {
-                moduleButtons = GameObject.Find("PCBContent").GetComponentsInChildren<Button>();
-                
                 runRobotButton = GameObject.Find("RunRobotButton").GetComponent<Button>();
-                runRobotButton.onClick.AddListener(()=>{ Debug.Log(FindObjectOfType<MinigameController>().solve_puzzel() );});
+                runRobotButton.onClick.AddListener(()=>{ });
                 
                 discardRobotButton = GameObject.Find("DiscardRobotButton").GetComponent<Button>();
                 discardRobotButton.onClick.AddListener(()=>{ /* signal mini game manager that the robot is broken and needs to be discarded*/ });
@@ -40,31 +38,10 @@ namespace LD47
 
                 timeText = GameObject.Find("OSTimeText").GetComponent<TMPro.TMP_Text>();
                 
-                for (int i = 0; i < moduleButtons.Length; i++) {
-                    int x = i;
-                    moduleButtons[i].onClick.AddListener(() =>
-                    {
-                        selectedModuleButton = moduleButtons[x];
-                    });
-                }
             }
 
             public void create_module_spot_button_from_list(Module[] modules) {
-                for (int i = 0; i < modules.Length; i++) {
-                    var a = Instantiate(moduleSlotPrefab, GameObject.Find("_SLOTGRID").transform);
-                    moduleSpotButtons.Add(a.GetComponent<Button>());
-                    moduleSpotButtons[i].GetComponentInChildren<Button>().image.sprite = sprites[(int)modules[i].type];
-                    
-                    int x = i;
-                    moduleSpotButtons[i].onClick.AddListener(() =>
-                    {
-                        if (selectedModuleButton != null) {
-                            selectedModuleButton.transform.position = moduleSpotButtons[x].transform.position;
-                            selectedModuleButton.transform.SetParent(moduleSpotButtons[x].transform);
-                            selectedModuleButton = null;
-                        }
-                    });
-                }
+
             }
 
             private void LateUpdate() {

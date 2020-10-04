@@ -11,75 +11,74 @@ namespace LD47
     {
         public class MinigameController : MonoBehaviour
         {
-            private PCUiController pcUI;
+            private Transform[] rings = new Transform[4];
+            private Transform[] ringConnectors = new Transform[4];
+            private Transform[] envRings = new Transform[5];
 
-            [SerializeField] private List<Module> moduleSlots;
-            [SerializeField] private List<Module> modules = new List<Module>();
+            private int index = 0;
 
+            private float rotationSpeed = 175.0f;
+
+            private bool gameIsActive = true;
+
+            private int score = 0;
+            
             private void Start() {
-                pcUI = GameObject.FindObjectOfType<PCUiController>();
+                rings[0] = GameObject.Find("Ring1").transform;
+                rings[1] = GameObject.Find("Ring2").transform;
+                rings[1].gameObject.SetActive(false);
                 
-                for (int i = 0; i < 9; i++) {
-                    Module module = new Module();
-                    module.type = (ModuleType)Random.Range(0, Enum.GetNames(typeof(ModuleType)).Length);
-                    
-                    moduleSlots.Add(module);
-                }
                 
-                for (int i = 0; i < modules.Count; i++) {
-                    
-                    // calculate west neightbour
-                    if ((i - 1) >= 0) {
-                        modules[i].west = i - 1;
-                    }
-                    else {
-                        modules[i].west = -1;
-                    }
-                    
-                    // calculate east neightbour
-                    if ((i + 1) <= modules.Count - 1) {
-                        modules[i].east = i + 1;              
-                    }
-                    else {
-                        modules[i].east = -1;
-                    }
-                    
-                    // calculate north  neightbour
-                    if ((i - 3) >= 0) {
-                        modules[i].north = i - 3;             
-                    }
-                    else {
-                        modules[i].north = -1;                    
-                    }
-                    
-                    // calculate south neightbour
-                    if ((i + 3) <= modules.Count) {
-                        modules[i].south = i + 3;               
-                    }
-                    else {
-                        modules[i].south = -1;                  
+                rings[2] = GameObject.Find("Ring3").transform;
+                rings[2].gameObject.SetActive(false);
+                
+                rings[3] = GameObject.Find("Ring4").transform;
+                rings[3].gameObject.SetActive(false);
+                
+                ringConnectors[0] = GameObject.Find("Ring1Connector").transform;
+                ringConnectors[0].Rotate(0,0,Random.Range(0,360));
+                
+                ringConnectors[1] = GameObject.Find("Ring2Connector").transform;
+                ringConnectors[1].Rotate(0,0,Random.Range(0,360));
+                
+                ringConnectors[2] = GameObject.Find("Ring3Connector").transform;
+                ringConnectors[2].Rotate(0,0,Random.Range(0,360));
+                
+                ringConnectors[3] = GameObject.Find("Ring4Connector").transform;
+                ringConnectors[3].Rotate(0,0,Random.Range(0,360));
+            }
+
+            private void Update() {
+                if (gameIsActive) {
+                    rings[index].transform.Rotate(0,0,rotationSpeed * Time.deltaTime);
+
+                    if (Input.GetKeyDown(KeyCode.Space)) {
+                        
+                            if (rings[index].GetComponent<RectTransform>().localEulerAngles.z > ringConnectors[index].GetComponent<RectTransform>().localEulerAngles.z - 10 &&
+                                rings[index].GetComponent<RectTransform>().localEulerAngles.z < ringConnectors[index].GetComponent<RectTransform>().localEulerAngles.z + 10) { // fix for treshhold
+                                
+                                Debug.Log("Yess!" + score);
+                                ringConnectors[index].GetComponentInChildren<Image>().color = Color.yellow;
+                                score++;
+                            }
+                            else {
+                                Debug.Log("Noo!" + score);
+                            }
+                            
+                            if (index + 1 > 3) {
+                                gameIsActive = false;
+                            }
+                            else {
+                                index++;
+                                rings[index].gameObject.SetActive(true);
+                                rotationSpeed *= 1.1f;
+                            }
                     }
                 }
-
-                pcUI.create_module_spot_button_from_list(moduleSlots.ToArray());
-            }
-            
-            public bool solve_puzzel() {
-
-                for (int i = 0; i < moduleSlots.Count; i++) {
-                    if (moduleSlots[i].type != modules[i].type)
-                        return false;
-                }
-
-                return true;
-            }
-            
-            public void set_module(int index, ModuleType type) {
-                modules[index].type = type;
             }
 
-            public Module get_module(int index) {
-                return modules[index];
+            public int get_game_score() {
+                return score;
             }
         }
     }
