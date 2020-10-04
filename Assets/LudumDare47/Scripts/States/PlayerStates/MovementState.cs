@@ -32,6 +32,8 @@ namespace LD47.States
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            player.CrosshairCanvas.SetActive(true);
+            player.PlayerPointer.CanDetect = true;
         }
 
         public override void OnExitState()

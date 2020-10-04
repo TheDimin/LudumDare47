@@ -159,6 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2755dc9820a7d2a4e89a0796df95bd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPointer: {fileID: 262395518}
+  crosshairCanvas: {fileID: 5256339067163905325}
   movementSpeed: 8.09
   lookSpeed: 150
   jumpForce: 2.5

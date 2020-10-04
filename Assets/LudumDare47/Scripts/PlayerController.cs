@@ -11,6 +11,10 @@ namespace LD47
 		public Rigidbody Playerbody { get; private set; } = null;
 		public float DistanceToGround { get; private set; } = 0;
 
+		[SerializeField] private PlayerPointer playerPointer;
+		public PlayerPointer PlayerPointer => playerPointer;
+		[SerializeField] private GameObject crosshairCanvas;
+		public GameObject CrosshairCanvas => crosshairCanvas;
 		[SerializeField] float movementSpeed;
 		public float MovementSpeed => movementSpeed;
 		[SerializeField] private float lookSpeed;
