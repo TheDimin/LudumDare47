@@ -17,7 +17,7 @@ namespace LD47
 
             private int index = 0;
 
-            private float rotationSpeed = 175.0f;
+            private float rotationSpeed = 100.0f;
 
             private bool gameIsActive = true;
 
@@ -54,8 +54,8 @@ namespace LD47
 
                     if (Input.GetKeyDown(KeyCode.Space)) {
                         
-                            if (rings[index].GetComponent<RectTransform>().localEulerAngles.z > ringConnectors[index].GetComponent<RectTransform>().localEulerAngles.z - 10 &&
-                                rings[index].GetComponent<RectTransform>().localEulerAngles.z < ringConnectors[index].GetComponent<RectTransform>().localEulerAngles.z + 10) { // fix for treshhold
+                            if (rings[index].GetComponent<RectTransform>().localEulerAngles.z > ringConnectors[index].GetComponent<RectTransform>().localEulerAngles.z - 6.25f &&
+                                rings[index].GetComponent<RectTransform>().localEulerAngles.z < ringConnectors[index].GetComponent<RectTransform>().localEulerAngles.z + 6.25f) { // fix for treshhold
                                 
                                 Debug.Log("Yess!" + score);
                                 ringConnectors[index].GetComponentInChildren<Image>().color = Color.yellow;
@@ -71,7 +71,7 @@ namespace LD47
                             else {
                                 index++;
                                 rings[index].gameObject.SetActive(true);
-                                rotationSpeed *= 1.1f;
+                                rotationSpeed *= 1.5f;
                             }
                     }
                 }
