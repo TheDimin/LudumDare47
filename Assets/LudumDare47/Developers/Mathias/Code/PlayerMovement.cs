@@ -17,7 +17,6 @@ namespace ld47
 		[SerializeField] private float jumpForce;
 		public float JumpForce => jumpForce;
 
-		private bool canMove = true;
 		public Rigidbody Playerbody { get; private set; } = null;
 		private Collider playerCollider = null;
 		public float DistanceToGround { get; private set; } = 0;
@@ -43,7 +42,5 @@ namespace ld47
 		{
 			stateManager.FixedUpdate();
 		}	
-
-		public void ToggleMove(bool active) => canMove = active;
 	}
 }

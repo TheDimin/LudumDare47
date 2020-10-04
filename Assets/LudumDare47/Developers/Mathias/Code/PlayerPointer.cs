@@ -1,6 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 namespace ld47
 {
@@ -12,11 +10,10 @@ namespace ld47
 		{
 			if (Input.GetMouseButtonUp(0))
 			{
-				Debug.DrawRay(transform.position, transform.forward, Color.blue, 2.0f);
-
 				if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, reach))
 				{
 					Debug.Log($"You hit: {raycastHit.collider.name}");
+					//TODO: Check if the hit object is interactible, if yes send message that the plyer starts interacting with it.
 				}
 			}
 		}
