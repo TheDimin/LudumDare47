@@ -18,8 +18,8 @@ namespace LD47
             StateManager = new GameStateManager(this);
 
             StateManager.RegisterState(new PreGameState());
-            StateManager.RegisterState(new MiniGameState());
             StateManager.RegisterState(new WalkingGameState());
+            StateManager.RegisterState(new MiniGameState());
 
             Player = FindPlayer();
         }

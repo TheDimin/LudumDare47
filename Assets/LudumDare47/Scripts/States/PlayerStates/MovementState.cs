@@ -5,69 +5,72 @@ using UnityEngine;
 
 namespace LD47.States
 {
-	public class MovementState : PlayerState
-	{
-		private bool IsGrounded => Physics.Raycast(player.transform.position, Vector3.down, player.DistanceToGround + 0.1f);
+    public class MovementState : PlayerState
+    {
+        private bool IsGrounded => Physics.Raycast(player.transform.position, Vector3.down, player.DistanceToGround + 0.1f);
 
-		private float xRotation = 0.0f;
-		private Transform cameraTransform = null;
+        private float xRotation = 0.0f;
+        private Transform cameraTransform = null;
 
-		public MovementState(PlayerController player) : base(player)
-		{
-			cameraTransform = player.GetComponentInChildren<CinemachineVirtualCamera>().transform;
-		}
+        public MovementState(PlayerController player) : base(player)
+        {
+            cameraTransform = player.GetComponentInChildren<CinemachineVirtualCamera>().transform;
+        }
 
-		public override bool CanEnter(StateBase currentState)
-		{
-			return GameManager.Instance.StateManager.GetState().GetType() == typeof(WalkingGameState);
-		}
+        public override bool CanEnter(StateBase currentState)
+        {
+            return GameManager.Instance.StateManager.GetState().GetType() == typeof(WalkingGameState);
+        }
 
-		public override bool CanExit()
-		{
-			return GameManager.Instance.StateManager.GetState().GetType() == typeof(PreGameState) ||
-			       GameManager.Instance.StateManager.GetState().GetType() == typeof(MiniGameState);
-		}
+        public override bool CanExit()
+        {
+            return GameManager.Instance.StateManager.GetState().GetType() == typeof(PreGameState) ||
+                   GameManager.Instance.StateManager.GetState().GetType() == typeof(MiniGameState);
+        }
 
-		public override void OnEnterState()
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-		}
+        public override void OnEnterState()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
-		public override void OnExitState()
-		{
-			
-		}
+        public override void OnExitState()
+        {
 
-		public override void Update()
-		{
-			Rotate();
-			Walk();
-		}
+        }
 
-		public override void FixedUpdate()
-		{
-			player.Playerbody.angularVelocity = Vector3.zero;
+        public override void Update()
+        {
+            Rotate();
+            Walk();
+        }
 
-			if (Input.GetAxis("Jump") > 0 && IsGrounded)
-			{
-				player.Playerbody.AddForce(Vector3.up * player.JumpForce, ForceMode.Impulse);
-			}
-		}
+        public override void FixedUpdate()
+        {
+            player.Playerbody.angularVelocity = Vector3.zero;
 
-		private void Rotate()
-		{
-			player.transform.Rotate(Vector3.up * (player.LookSpeed * Input.GetAxis("Mouse X") * Time.deltaTime));
+            if (Input.GetAxis("Jump") > 0 && IsGrounded)
+            {
+                player.Playerbody.velocity += Vector3.up * player.JumpForce ;
+            }
 
-			xRotation -= Input.GetAxis("Mouse Y") * player.LookSpeed * Time.deltaTime;
-			xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
-			cameraTransform.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
-		}
 
-		private void Walk()
-		{
-			Vector3 movement = player.transform.right * Input.GetAxis("Horizontal") + player.transform.forward * Input.GetAxis("Vertical");
-			player.Playerbody.position += movement * player.MovementSpeed * Time.deltaTime;
-		}
-	}
+            player.Playerbody.velocity = (movement * player.MovementSpeed * 100 * Time.fixedDeltaTime + ((Vector3.up * player.Playerbody.velocity.y) + Physics.gravity * Time.deltaTime));
+        }
+
+        private void Rotate()
+        {
+            player.transform.Rotate(Vector3.up * (player.LookSpeed * Input.GetAxis("Mouse X") * Time.deltaTime));
+
+            xRotation -= Input.GetAxis("Mouse Y") * player.LookSpeed * Time.deltaTime;
+            xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
+            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
+        }
+
+        private Vector3 movement;
+        private void Walk()
+        {
+            movement = player.transform.right * Input.GetAxis("Horizontal") + player.transform.forward * Input.GetAxis("Vertical");
+        }
+    }
 }
