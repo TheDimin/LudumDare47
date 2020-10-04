@@ -36,7 +36,7 @@ namespace LD47.States
 
 		public override void OnExitState()
 		{
-			Debug.Log("Byew");
+			
 		}
 
 		public override void Update()

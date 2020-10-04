@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JimTheKiwifruit;
 using Tools.StateManager;
 using UnityEngine;
 
@@ -7,9 +8,9 @@ namespace LD47
 {
     namespace Minigame
     {
-        public class PCController : MonoBehaviour
+        public class PCController : Singleton<PCController>
         {
-            private StateManagerBase<PCState> pcStateManager;
+            public StateManagerBase<PCState> pcStateManager;
             
             private void Start() {
                 pcStateManager = new StateManagerBase<PCState>();

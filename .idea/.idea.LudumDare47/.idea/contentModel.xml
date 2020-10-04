@@ -12,12 +12,6 @@
           <e p="Scripts" t="Include">
             <e p="ConveyorBelt.cs" t="Include" />
             <e p="GameManager.cs" t="Include" />
-            <e p="GameStates" t="Include">
-              <e p="GameStateBase.cs" t="Include" />
-              <e p="MiniGameState.cs" t="Include" />
-              <e p="PreGameState.cs" t="Include" />
-              <e p="WalkingGameState.cs" t="Include" />
-            </e>
             <e p="Interactible.cs" t="Include" />
             <e p="Interfaces" t="Include">
               <e p="IInteractible.cs" t="Include" />
@@ -39,6 +33,12 @@
             <e p="PlayerController.cs" t="Include" />
             <e p="PlayerPointer.cs" t="Include" />
             <e p="States" t="Include">
+              <e p="GameStates" t="Include">
+                <e p="GameStateBase.cs" t="Include" />
+                <e p="MiniGameState.cs" t="Include" />
+                <e p="PreGameState.cs" t="Include" />
+                <e p="WalkingGameState.cs" t="Include" />
+              </e>
               <e p="PlayerStates" t="Include">
                 <e p="MovementState.cs" t="Include" />
                 <e p="PlayerState.cs" t="Include" />

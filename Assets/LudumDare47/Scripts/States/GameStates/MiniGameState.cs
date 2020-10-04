@@ -1,4 +1,5 @@
-﻿using Tools.StateManager;
+﻿using LD47.Minigame;
+using Tools.StateManager;
 using UnityEngine;
 
 namespace LD47.GameStates
@@ -13,12 +14,12 @@ namespace LD47.GameStates
 
         public override void OnExitState()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public override bool CanEnter(StateBase currentStateBase)
         {
-            throw new System.NotImplementedException();
+            return PCController.Instance.pcStateManager.GetState().GetType() == typeof(PCIdleState);
         }
 
         public override bool CanExit()
