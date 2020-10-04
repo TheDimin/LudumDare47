@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: PlayerCamera
-    m_To: VCam
+    m_To: VirtualCam
     m_Blend:
       m_Style: 1
       m_Time: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: VCam
+  - m_From: VirtualCam
     m_To: PlayerCamera
     m_Blend:
       m_Style: 1

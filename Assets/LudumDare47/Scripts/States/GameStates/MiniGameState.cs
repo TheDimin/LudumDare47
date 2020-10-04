@@ -12,13 +12,13 @@ namespace LD47.GameStates
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            gameManager.Player.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.SetActive(false);
+            gameManager.Player.GetComponentInChildren<CinemachineVirtualCamera>().enabled = false;
             ConveyorBelt.Instance.AttachDefaultObject();
         }
 
         public override void OnExitState()
         {
-            gameManager.Player.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.SetActive(true);
+            gameManager.Player.GetComponentInChildren<CinemachineVirtualCamera>().enabled = true;
         }
 
         public override bool CanEnter(StateBase currentStateBase)
