@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Tools.StateManager;
+﻿using Tools.StateManager;
 using UnityEngine;
 
 namespace LD47.GameStates
@@ -9,7 +7,8 @@ namespace LD47.GameStates
     {
         public override void OnEnterState()
         {
-            throw new System.NotImplementedException();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         public override void OnExitState()
@@ -28,4 +27,3 @@ namespace LD47.GameStates
         }
     }
 }
-

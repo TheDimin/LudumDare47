@@ -17,16 +17,20 @@ namespace LD47
 
 		public void OnInteract(GameObject interactingObject)
 		{
-			interactingObject.GetComponent<PlayerController>().AttachPickedupObject(this);
+			var playerController = interactingObject.GetComponent<PlayerController>();
+			
+			if (playerController.PickedupObject != null) return;
+			
+			playerController.AttachPickedupObject(this);
 
-			Transform carrier = interactingObject.transform.Find("{PickupCarrier}");
+			var carrier = interactingObject.transform.Find("{PickupCarrier}");
 			if (carrier == null)
 			{
 				Debug.LogError("The " + interactingObject.name + "should have {PickupCarrier} as a child");
 				return;
 			}
 
-			if(ConveyorBelt.Instance.speed != 0)
+			if (ConveyorBelt.Instance.speed != 0)
 			{
 				return;
 			}

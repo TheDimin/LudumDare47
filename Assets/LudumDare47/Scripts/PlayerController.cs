@@ -31,6 +31,7 @@ namespace LD47
 			Cursor.lockState = CursorLockMode.Locked;
 
 			stateManager.RegisterState(new MovementState(this));
+			stateManager.RegisterState(new UiState(this));
 		}
 
 		private void Update()

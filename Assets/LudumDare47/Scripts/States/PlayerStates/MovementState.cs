@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using LD47.GameStates;
 using Tools.StateManager;
 using UnityEngine;
 
@@ -18,12 +19,13 @@ namespace LD47.States
 
 		public override bool CanEnter(StateBase currentState)
 		{
-			return currentState == null;
+			return GameManager.Instance.StateManager.GetState().GetType() == typeof(WalkingGameState);
 		}
 
 		public override bool CanExit()
 		{
-			return false;
+			return GameManager.Instance.StateManager.GetState().GetType() == typeof(PreGameState) ||
+			       GameManager.Instance.StateManager.GetState().GetType() == typeof(MiniGameState);
 		}
 
 		public override void OnEnterState()
