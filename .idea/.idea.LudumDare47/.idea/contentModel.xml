@@ -12,12 +12,12 @@
           <e p="Scripts" t="Include">
             <e p="ConveyorBelt.cs" t="Include" />
             <e p="GameManager.cs" t="Include" />
-            <e p="Interactible.cs" t="Include" />
             <e p="Interfaces" t="Include">
               <e p="IInteractible.cs" t="Include" />
               <e p="IPickupable.cs" t="Include" />
             </e>
             <e p="LavaPit.cs" t="Include" />
+            <e p="MainmenuEvents.cs" t="Include" />
             <e p="Minigame" t="Include">
               <e p="MinigameController.cs" t="Include" />
               <e p="PCBrokenProgressState.cs" t="Include" />
@@ -29,6 +29,7 @@
               <e p="PCUiController.cs" t="Include" />
             </e>
             <e p="OnConveyorBelt.cs" t="Include" />
+            <e p="PcInteractible.cs" t="Include" />
             <e p="Pickupable.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="PlayerPointer.cs" t="Include" />
@@ -45,9 +46,9 @@
                 <e p="UiState.cs" t="Include" />
               </e>
             </e>
+            <e p="TextScroller.cs" t="Include" />
           </e>
         </e>
-        <e p="MainmenuEvents.cs" t="Include" />
         <e p="Modern UI Pack" t="Include">
           <e p="Editor" t="Include">
             <e p="ContextMenu.cs" t="Include" />
@@ -220,7 +221,6 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
-        <e p="TextScroller.cs" t="Include" />
       </e>
       <e p="LudumDare47.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

@@ -19,7 +19,7 @@ namespace LD47.GameStates
 
         public override bool CanEnter(StateBase currentStateBase)
         {
-            return PCController.Instance.pcStateManager.GetState().GetType() == typeof(PCIdleState);
+            return PCController.Instance.pcStateManager.GetState().GetType() == typeof(PCPlayState);
         }
 
         public override bool CanExit()
