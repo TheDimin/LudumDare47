@@ -1,18 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tools.StateManager;
 using UnityEngine;
 
-public class MiniGameState : MonoBehaviour
+namespace LD47.GameStates
 {
-    // Start is called before the first frame update
-    void Start()
+    public class MiniGameState : GameStateBase
     {
-        
-    }
+        public override void OnEnterState()
+        {
+            throw new System.NotImplementedException();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override void OnExitState()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override bool CanEnter(StateBase currentStateBase)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override bool CanExit()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
+

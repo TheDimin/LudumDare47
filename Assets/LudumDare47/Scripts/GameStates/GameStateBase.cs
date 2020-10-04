@@ -6,18 +6,28 @@ using UnityEngine;
 
 namespace LD47.GameStates
 {
-    public abstract class GameStateManager : StateManagerBase<GameStateBase>
+    public class GameStateManager : StateManagerBase<GameStateBase>
     {
-       // public GameStateManager(GameMang)
+        private GameManager gameManager;
+        public GameStateManager(GameManager gm)
+        {
+            gameManager = gm;
+        }
+
         public override void RegisterState(GameStateBase stateBase)
         {
             base.RegisterState(stateBase);
-
+            stateBase.SetGameManagerRef(gameManager);
         }
     }
 
     public abstract class GameStateBase : StateBase
     {
+        protected GameManager gameManager;
 
+        internal void SetGameManagerRef(GameManager gameManager)
+        {
+            this.gameManager = gameManager;
+        }
     }
 }
