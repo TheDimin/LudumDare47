@@ -14,6 +14,13 @@
       "dependencies": {},
       "hash": "2370a58dc0ac0d40337569c5c27bd6ac5fc83839"
     },
+    "com.unity.2d.pixel-perfect": {
+      "version": "3.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -22,13 +29,6 @@
     },
     "com.unity.cinemachine": {
       "version": "2.6.3",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.2d.pixel-perfect": {
-      "version": "3.0.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -66,6 +66,13 @@
     },
     "com.unity.ide.vscode": {
       "version": "1.2.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.postprocessing": {
+      "version": "2.3.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
