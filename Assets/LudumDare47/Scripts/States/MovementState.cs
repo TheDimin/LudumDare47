@@ -3,13 +3,13 @@ using Tools.StateManager;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-namespace ld47
+namespace LD47
 {
 	public abstract class PlayerState : StateBase
 	{
-		protected PlayerMovement player = null;
+		protected PlayerController player = null;
 
-		public PlayerState(PlayerMovement player)
+		public PlayerState(PlayerController player)
 		{
 			this.player = player;
 		}
@@ -22,7 +22,7 @@ namespace ld47
 		private float xRotation = 0.0f;
 		private Transform cameraTransform = null;
 
-		public MovementState(PlayerMovement player) : base(player)
+		public MovementState(PlayerController player) : base(player)
 		{
 			cameraTransform = player.GetComponentInChildren<CinemachineVirtualCamera>().transform;
 		}

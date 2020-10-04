@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using LD47.Interfaces;
+using UnityEngine;
 
-namespace ld47
+namespace LD47
 {
 	public class PlayerPointer : MonoBehaviour
 	{
@@ -12,8 +13,12 @@ namespace ld47
 			{
 				if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, reach))
 				{
-					Debug.Log($"You hit: {raycastHit.collider.name}");
-					//TODO: Check if the hit object is interactible, if yes send message that the plyer starts interacting with it.
+					if (raycastHit.collider.GetComponent<IInteractible>() == null)
+					{
+						return;
+					}
+
+					raycastHit.collider.gameObject.SendMessage("OnInteract", transform.parent.gameObject);
 				}
 			}
 		}

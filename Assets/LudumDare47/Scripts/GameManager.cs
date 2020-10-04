@@ -2,7 +2,7 @@
 using Tools.StateManager;
 using UnityEngine;
 
-namespace ld47
+namespace LD47
 {
 	public class GameManager : Singleton<GameManager>
 	{

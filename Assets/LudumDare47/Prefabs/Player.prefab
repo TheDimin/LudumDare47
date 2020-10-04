@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &192953302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 192953303}
+  m_Layer: 0
+  m_Name: '{PickupCarrier}'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &192953303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192953302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.07}
+  m_LocalScale: {x: 0.49757, y: 0.49757, z: 0.49757}
+  m_Children: []
+  m_Father: {fileID: 5256339066624633110}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5256339066624633106
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +43,8 @@ GameObject:
   - component: {fileID: 5256339066624633104}
   - component: {fileID: 5256339066624633105}
   - component: {fileID: 5256339066624633109}
-  - component: {fileID: 5256339066624633108}
+  - component: {fileID: 7961532745579847768}
+  - component: {fileID: 1840008788}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -34,6 +65,7 @@ Transform:
   m_Children:
   - {fileID: 5256339067264895595}
   - {fileID: 5256339067163905324}
+  - {fileID: 192953303}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,7 +148,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &5256339066624633108
+--- !u!114 &7961532745579847768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,11 +157,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 5256339066624633106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64fb92ba963c481499516cb404c43284, type: 3}
+  m_Script: {fileID: 11500000, guid: 2755dc9820a7d2a4e89a0796df95bd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
-  lookSpeed: 150
+  lookSpeed: 125
+  jumpForce: 100
+--- !u!114 &1840008788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5256339066624633106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2755dc9820a7d2a4e89a0796df95bd78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 10
+  lookSpeed: 125
   jumpForce: 100
 --- !u!1 &5256339066860720263
 GameObject:
@@ -143,7 +190,7 @@ GameObject:
   - component: {fileID: 5256339066860720260}
   - component: {fileID: 5256339066860720261}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +213,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 55.825195, y: 55.825195}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5256339066860720260
 CanvasRenderer:
@@ -196,7 +243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -441911724947170499, guid: 590622e324cd6174e99d0dd1658a1085,
+  m_Sprite: {fileID: -5606941974626773430, guid: 590622e324cd6174e99d0dd1658a1085,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -279,10 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -317,6 +364,7 @@ GameObject:
   - component: {fileID: 5256339067264895595}
   - component: {fileID: 5256339067264895593}
   - component: {fileID: 5256339067264895594}
+  - component: {fileID: 262395518}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -382,6 +430,19 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 5256339067968794155}
+--- !u!114 &262395518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5256339067264895572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8e19b6efe52614ab9e3ef10a7a1281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reach: 5
 --- !u!1 &5256339067968794132
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,12 +2,11 @@
 using Tools.StateManager;
 using UnityEngine;
 
-namespace ld47
+namespace LD47
 {
 	[RequireComponent(typeof(Rigidbody))]
-	public class PlayerMovement : MonoBehaviour
+	public class PlayerController : MonoBehaviour
 	{
-		
 		private StateManagerBase<PlayerState> stateManager = new StateManagerBase<PlayerState>();
 
 		[SerializeField] float movementSpeed;
