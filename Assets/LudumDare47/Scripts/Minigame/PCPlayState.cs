@@ -18,9 +18,9 @@ namespace LD47
             
             public override void OnEnterState() {
                 pcUI = GameObject.FindObjectOfType<PCUiController>();
-                minigame = new MinigameController();
-                
                 playUI.SetActive(true);
+                
+                minigame = new MinigameController();
             }
 
             public override void OnExitState() {

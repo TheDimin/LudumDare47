@@ -9,16 +9,14 @@ namespace LD47
         {
             private GameObject idleUI;
             
-            public override void OnEnterState() {
-                idleUI.SetActive(false);
-                idleUI = GameObject.Find("_IDLE");
-            }
-
             public PCIdleState() {
-                pcUI = GameObject.FindObjectOfType<PCUiController>();
+                idleUI = GameObject.Find("_IDLE");
+                idleUI.SetActive(false);
+            }
+            
+            public override void OnEnterState() {
                 PCController.Instance.PlayingOnPC = false;
                 idleUI.SetActive(true);
-                
             }
 
             public override void OnExitState() {
