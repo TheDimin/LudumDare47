@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Tools.StateManager;
-using UnityEngine;
+﻿using Tools.StateManager;
 
 namespace LD47
 {
@@ -9,7 +6,7 @@ namespace LD47
     {
         public abstract class PCState : StateBase
         {
-            
+            protected PCUiController pcUI;
         }
     }
 }

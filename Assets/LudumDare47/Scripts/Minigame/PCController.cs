@@ -13,6 +13,9 @@ namespace LD47
             
             private void Start() {
                 pcStateManager = new StateManagerBase<PCState>();
+                pcStateManager.RegisterState(new PCIdleState());
+                pcStateManager.RegisterState(new PCPlayState());
+                pcStateManager.RegisterState(new PCProgressState());
             }
 
             private void Update() {

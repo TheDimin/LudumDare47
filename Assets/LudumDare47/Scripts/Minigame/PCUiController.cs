@@ -14,6 +14,10 @@ namespace LD47
             private Button ludumDareButton;
             private TMPro.TMP_Text timeText;
 
+            private GameObject idleUI;
+            private GameObject pcbEditorUI;
+            private GameObject progressUI;
+
             private void Awake() {
                 ludumDareButton = GameObject.Find("LudumDareButton").GetComponent<Button>();
                 ludumDareButton.onClick.AddListener(()=>{ Application.OpenURL("https://ldjam.com/"); /* little easter egg :) */ });

@@ -5,11 +5,10 @@ namespace LD47
 {
     namespace Minigame
     {
-        public class PCProgressState : PCState
+        public class PCBrokenProgressState : PCState
         {
             public override void OnEnterState() {
                 pcUI = GameObject.FindObjectOfType<PCUiController>();
-                
             }
 
             public override void OnExitState() {
@@ -17,7 +16,7 @@ namespace LD47
             }
 
             public override bool CanEnter(StateBase currentStateBase) {
-                return true;
+                return false;
             }
 
             public override bool CanExit() {
