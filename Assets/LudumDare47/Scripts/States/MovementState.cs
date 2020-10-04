@@ -1,20 +1,9 @@
 ﻿using Cinemachine;
 using Tools.StateManager;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
-namespace LD47
+namespace LD47.States
 {
-	public abstract class PlayerState : StateBase
-	{
-		protected PlayerController player = null;
-
-		public PlayerState(PlayerController player)
-		{
-			this.player = player;
-		}
-	}
-
 	public class MovementState : PlayerState
 	{
 		private bool IsGrounded => Physics.Raycast(player.transform.position, Vector3.down, player.DistanceToGround + 0.1f);
@@ -27,9 +16,9 @@ namespace LD47
 			cameraTransform = player.GetComponentInChildren<CinemachineVirtualCamera>().transform;
 		}
 
-		public override bool CanEnter(StateBase currentStateBase)
+		public override bool CanEnter(StateBase currentState)
 		{
-			return currentStateBase == null;
+			return currentState == null;
 		}
 
 		public override bool CanExit()
@@ -39,7 +28,8 @@ namespace LD47
 
 		public override void OnEnterState()
 		{
-			Debug.Log("Hellow");
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
 		}
 
 		public override void OnExitState()
@@ -55,9 +45,11 @@ namespace LD47
 
 		public override void FixedUpdate()
 		{
+			player.Playerbody.angularVelocity = Vector3.zero;
+
 			if (Input.GetAxis("Jump") > 0 && IsGrounded)
 			{
-				player.Playerbody.AddForce(Vector3.up * player.JumpForce * Time.deltaTime, ForceMode.Impulse);
+				player.Playerbody.AddForce(Vector3.up * player.JumpForce, ForceMode.Impulse);
 			}
 		}
 

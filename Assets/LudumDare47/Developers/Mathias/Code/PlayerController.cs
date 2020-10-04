@@ -1,5 +1,5 @@
-﻿using Cinemachine;
-using Tools.StateManager;
+﻿using Tools.StateManager;
+using LD47.States;
 using UnityEngine;
 
 namespace LD47
@@ -9,6 +9,7 @@ namespace LD47
 	{
 		private StateManagerBase<PlayerState> stateManager = new StateManagerBase<PlayerState>();
 
+		public Pickupable PickedupObject { get; private set; }
 		[SerializeField] float movementSpeed;
 		public float MovementSpeed => movementSpeed;
 		[SerializeField] private float lookSpeed;
@@ -35,11 +36,16 @@ namespace LD47
 		private void Update()
 		{
 			stateManager.Update();
+
+			if (Input.GetKeyDown(KeyCode.R) && PickedupObject != null) PickedupObject.OnRelease(gameObject);
 		}
 
 		private void FixedUpdate()
 		{
 			stateManager.FixedUpdate();
-		}	
+		}
+		
+		public void AttachPickedupObject(Pickupable pickedupObject) => PickedupObject = pickedupObject;
+		public void DettachPickedupObject() => PickedupObject = null;
 	}
 }

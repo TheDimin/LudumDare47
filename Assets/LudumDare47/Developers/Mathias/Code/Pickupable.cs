@@ -17,12 +17,17 @@ namespace LD47
 
 		public void OnInteract(GameObject interactingObject)
 		{
-			Debug.Log($"{interactingObject.name} is interacting");
+			interactingObject.GetComponent<PlayerController>().AttachPickedupObject(this);
 
 			Transform carrier = interactingObject.transform.Find("{PickupCarrier}");
 			if (carrier == null)
 			{
 				Debug.LogError("The " + interactingObject.name + "should have {PickupCarrier} as a child");
+				return;
+			}
+
+			if(ConveyorBelt.Instance.speed != 0)
+			{
 				return;
 			}
 
@@ -36,6 +41,13 @@ namespace LD47
 			transform.localPosition = Vector3.zero;
 			collider.enabled = false;
 			rbody.isKinematic = true;
+		}
+
+		public void OnRelease(GameObject carrier)
+		{
+			carrier.GetComponent<PlayerController>().DettachPickedupObject();
+
+			OnRelease();
 		}
 
 		public void OnRelease()
