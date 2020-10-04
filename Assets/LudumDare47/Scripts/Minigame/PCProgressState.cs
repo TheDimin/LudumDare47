@@ -9,12 +9,8 @@ namespace LD47
         {
             private GameObject progressUI;
             
-            
-            
             public override void OnEnterState() {
                 pcUI = GameObject.FindObjectOfType<PCUiController>();
-                
-                progressUI.
                 
                 progressUI.SetActive(true);
             }
