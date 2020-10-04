@@ -91,7 +91,7 @@ public class ConveyorBelt : MonoBehaviour
         SetSpeed(1);
     }
 
-    [SerializeField] private GameObject spawnGameObject;
+    [SerializeField] private GameObject spawnGameObject = null;
     [Button()]
     private void AddTestObject()
     {
