@@ -7,13 +7,8 @@ namespace LD47.GameStates
 {
     public class MiniGameState : GameStateBase
     {
-        private StateManagerBase<PCState> pcState;
-
         public override void OnEnterState()
         {
-            if (pcState == null)
-                pcState = PCController.Instance.pcStateManager;
-            
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -28,12 +23,12 @@ namespace LD47.GameStates
 
         public override bool CanEnter(StateBase currentStateBase)
         {
-            return pcState.GetState().GetType() == typeof(PCPlayState);
+            return PCController.Instance.pcStateManager.GetState().GetType() == typeof(PCPlayState);
         }
 
         public override bool CanExit()
         {
-            return pcState.GetState().GetType() != typeof(PCPlayState);
+            return PCController.Instance.pcStateManager.GetState().GetType() != typeof(PCPlayState);
         }
     }
 }
