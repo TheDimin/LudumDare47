@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   lookSpeed: 125
-  jumpForce: 100
+  jumpForce: 2.5
 --- !u!1 &5256339066860720263
 GameObject:
   m_ObjectHideFlags: 0

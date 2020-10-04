@@ -9,7 +9,7 @@ namespace LD47
 {
     namespace Minigame
     {
-        public class MinigameController : MonoBehaviour
+        public class MinigameController
         {
             private Transform[] rings = new Transform[4];
             private Transform[] ringConnectors = new Transform[4];
@@ -23,7 +23,7 @@ namespace LD47
 
             private int score = 0;
             
-            private void Start() {
+            public MinigameController() {
                 rings[0] = GameObject.Find("Ring1").transform;
                 rings[1] = GameObject.Find("Ring2").transform;
                 rings[1].gameObject.SetActive(false);
@@ -48,7 +48,7 @@ namespace LD47
                 ringConnectors[3].Rotate(0,0,Random.Range(0,360));
             }
 
-            private void Update() {
+            public void Update() {
                 if (gameIsActive) {
                     rings[index].transform.Rotate(0,0,rotationSpeed * Time.deltaTime);
 
@@ -79,6 +79,10 @@ namespace LD47
 
             public int get_game_score() {
                 return score;
+            }
+
+            public int get_game_stage() {
+                return index;
             }
         }
     }

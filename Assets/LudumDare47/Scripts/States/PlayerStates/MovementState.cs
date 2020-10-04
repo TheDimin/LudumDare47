@@ -65,7 +65,7 @@ namespace LD47.States
 		private void Walk()
 		{
 			Vector3 movement = player.transform.right * Input.GetAxis("Horizontal") + player.transform.forward * Input.GetAxis("Vertical");
-			player.transform.position += movement * player.MovementSpeed * Time.deltaTime;
+			player.Playerbody.position += movement * player.MovementSpeed * Time.deltaTime;
 		}
 	}
 }

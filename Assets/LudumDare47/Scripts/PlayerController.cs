@@ -7,9 +7,10 @@ namespace LD47
 	[RequireComponent(typeof(Rigidbody))]
 	public class PlayerController : MonoBehaviour
 	{
-		private StateManagerBase<PlayerState> stateManager = new StateManagerBase<PlayerState>();
-
 		public Pickupable PickedupObject { get; private set; }
+		public Rigidbody Playerbody { get; private set; } = null;
+		public float DistanceToGround { get; private set; } = 0;
+
 		[SerializeField] float movementSpeed;
 		public float MovementSpeed => movementSpeed;
 		[SerializeField] private float lookSpeed;
@@ -17,9 +18,8 @@ namespace LD47
 		[SerializeField] private float jumpForce;
 		public float JumpForce => jumpForce;
 
-		public Rigidbody Playerbody { get; private set; } = null;
+		private StateManagerBase<PlayerState> stateManager = new StateManagerBase<PlayerState>();
 		private Collider playerCollider = null;
-		public float DistanceToGround { get; private set; } = 0;
 
 		private void Awake()
 		{

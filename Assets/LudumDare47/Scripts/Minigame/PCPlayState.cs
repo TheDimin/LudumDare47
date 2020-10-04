@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Tools.StateManager;
+﻿using Tools.StateManager;
 using UnityEngine;
 
 namespace LD47
@@ -9,12 +7,22 @@ namespace LD47
     {
         public class PCPlayState : PCState
         {
+            public MinigameController minigame;
+            private GameObject playUI;
+            
             public override void OnEnterState() {
+                pcUI = GameObject.FindObjectOfType<PCUiController>();
+                minigame = new MinigameController();
                 
+                playUI = GameObject.Find("PlayUI");
             }
 
             public override void OnExitState() {
                 
+            }
+
+            public override void Update() {
+                minigame.Update();
             }
 
             public override bool CanEnter(StateBase currentStateBase) {
