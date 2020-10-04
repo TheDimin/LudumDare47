@@ -13,6 +13,7 @@ namespace LD47
         {
             private PCUiController pcUI;
 
+            [SerializeField] private List<Module> moduleSlots;
             [SerializeField] private List<Module> modules = new List<Module>();
 
             private void Start() {
@@ -22,7 +23,7 @@ namespace LD47
                     Module module = new Module();
                     module.type = (ModuleType)Random.Range(0, Enum.GetNames(typeof(ModuleType)).Length);
                     
-                    modules.Add(module);
+                    moduleSlots.Add(module);
                 }
                 
                 for (int i = 0; i < modules.Count; i++) {
@@ -60,11 +61,17 @@ namespace LD47
                     }
                 }
 
-                pcUI.create_module_spot_button_from_list(modules.ToArray());
+                pcUI.create_module_spot_button_from_list(moduleSlots.ToArray());
             }
             
-            private bool solve_puzzel() {
-                return false;
+            public bool solve_puzzel() {
+
+                for (int i = 0; i < moduleSlots.Count; i++) {
+                    if (moduleSlots[i].type != modules[i].type)
+                        return false;
+                }
+
+                return true;
             }
             
             public void set_module(int index, ModuleType type) {

@@ -30,7 +30,7 @@ namespace LD47
                 moduleButtons = GameObject.Find("PCBContent").GetComponentsInChildren<Button>();
                 
                 runRobotButton = GameObject.Find("RunRobotButton").GetComponent<Button>();
-                runRobotButton.onClick.AddListener(()=>{ /* signal mini game manager that the pcb plate needs to be checked */ });
+                runRobotButton.onClick.AddListener(()=>{ Debug.Log(FindObjectOfType<MinigameController>().solve_puzzel() );});
                 
                 discardRobotButton = GameObject.Find("DiscardRobotButton").GetComponent<Button>();
                 discardRobotButton.onClick.AddListener(()=>{ /* signal mini game manager that the robot is broken and needs to be discarded*/ });
