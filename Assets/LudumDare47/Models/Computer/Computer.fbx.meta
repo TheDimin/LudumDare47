@@ -1,22 +1,12 @@
 fileFormatVersion: 2
-guid: 9e1a634ffffd0744daa626c045125fff
+guid: 1feb6dd973449eb4192475508d3c6a5a
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ConveyorBelt
-    second: {fileID: 2100000, guid: f5db59af7720f3a49b182cdb8a5baec0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ConveyorBeltOutside
-    second: {fileID: 2100000, guid: bcf9c624bf3600148b975cbe8dcd2925, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
-    materialName: 2
+    materialName: 0
     materialSearch: 1
     materialLocation: 1
   animations:
