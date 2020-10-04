@@ -7,13 +7,20 @@ namespace LD47
     {
         public class PCProgressState : PCState
         {
+            private GameObject progressUI;
+            
+            
+            
             public override void OnEnterState() {
                 pcUI = GameObject.FindObjectOfType<PCUiController>();
                 
+                progressUI.
+                
+                progressUI.SetActive(true);
             }
 
             public override void OnExitState() {
-                
+                progressUI.SetActive(false);
             }
 
             public override bool CanEnter(StateBase currentStateBase) {
