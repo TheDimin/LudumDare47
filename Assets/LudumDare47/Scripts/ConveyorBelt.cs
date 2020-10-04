@@ -95,12 +95,6 @@ public class ConveyorBelt : Singleton<ConveyorBelt>
     }
 
     [SerializeField] private GameObject spawnGameObject = null;
-    [Button()]
-    private void AddTestObject()
-    {
-        var obj = GameObject.Instantiate(spawnGameObject, Vector3.forward, Quaternion.identity);
-        AttachObject(obj);
-    }
 
     [Button("SetConveyorBelts")]
     private void SetConveyorBelts()
@@ -180,7 +174,6 @@ public class ConveyorBelt : Singleton<ConveyorBelt>
         }
 
 
-
         attachedObjects.Add(obj);
         obj.GetComponent<Rigidbody>().isKinematic = true;
         obj.transform.SetParent(transform);
@@ -195,6 +188,13 @@ public class ConveyorBelt : Singleton<ConveyorBelt>
         clothB.sphereColliders = colliders;
 
         clothA.enabled = true;
+    }
+
+    [Button()]
+    public void AttachDefaultObject()
+    {
+        var obj = GameObject.Instantiate(spawnGameObject, Vector3.forward, Quaternion.identity);
+        AttachObject(obj);
     }
 
     public void DetachObject(GameObject obj)

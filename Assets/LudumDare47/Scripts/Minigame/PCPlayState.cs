@@ -17,10 +17,10 @@ namespace LD47
             }
             
             public override void OnEnterState() {
-                playUI.SetActive(true);
-                
                 pcUI = GameObject.FindObjectOfType<PCUiController>();
                 minigame = new MinigameController();
+                
+                playUI.SetActive(true);
             }
 
             public override void OnExitState() {
@@ -39,7 +39,7 @@ namespace LD47
             public override bool CanEnter(StateBase currentStateBase) {
                 return currentStateBase.GetType() == typeof(PCIdleState);
             }
-
+            
             public override bool CanExit() {
                 return minigame.get_game_score() == 3 || minigame.get_game_stage() == 3;
             }
