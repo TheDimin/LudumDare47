@@ -9,6 +9,9 @@ namespace LD47
     {
         public class PCController : MonoBehaviour
         {
+            public static int score = 0;
+            public static int stage = 0;
+            
             private StateManagerBase<PCState> pcStateManager;
             
             private void Start() {
@@ -16,6 +19,7 @@ namespace LD47
                 pcStateManager.RegisterState(new PCIdleState());
                 pcStateManager.RegisterState(new PCPlayState());
                 pcStateManager.RegisterState(new PCProgressState());
+                pcStateManager.RegisterState(new PCBrokenProgressState());
             }
 
             private void Update() {
