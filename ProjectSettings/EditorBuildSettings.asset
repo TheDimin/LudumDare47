@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/LudumDare47/Scenes/GameScene.unity
     guid: b0a1a8e635a36064889c2d7d9e1c120d
+  - enabled: 1
+    path: Assets/LudumDare47/Scenes/MainMenu.unity
+    guid: 44aabc1dd7ff39242b9d57c90c46ea9a
   m_configObjects: {}
