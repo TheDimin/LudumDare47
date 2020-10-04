@@ -671,7 +671,19 @@ MonoBehaviour:
   buttonText: Quit
   clickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2186472661723284988}
+        m_TargetAssemblyTypeName: MainmenuEvents, Assembly-CSharp
+        m_MethodName: OnExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   hoverEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1001,7 +1013,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\n\n\n\n<Insert Project Name>\n\n\n\nThis Project was made for Ludum dare
-    47\nTheme: Stuck in a loop\n\n\n\nProgrammers\n\n- Mathias Bever\n- Jesper Enschede\n-
+    47\nTheme: Stuck in a loop\n\n\n\nProgrammers\n\n- Mathias Bevers\n- Jesper Enschede\n-
     Damian van Hoorn\n\n\n\nSpecial thanks to the following Tools\n\n- Unity\n- Blender\n-
     The internet\n\n\n\nSpecial thanks to the makers of these assets\n\n- Modern
     UI Pack\n- Naughty Attributes \n- Simple Singleton\n\n\n\n\n\n\nThank you for
@@ -1139,7 +1151,19 @@ MonoBehaviour:
   buttonText: Play
   clickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2186472661723284988}
+        m_TargetAssemblyTypeName: MainmenuEvents, Assembly-CSharp
+        m_MethodName: OnPlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   hoverEvent:
     m_PersistentCalls:
       m_Calls: []

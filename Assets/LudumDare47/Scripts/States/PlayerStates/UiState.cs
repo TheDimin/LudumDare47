@@ -27,7 +27,7 @@ namespace LD47.States
 
 		public override void OnExitState()
 		{
-			throw new System.NotImplementedException();
+			//throw new System.NotImplementedException();
 		}
 	}
 }
