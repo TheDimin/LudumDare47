@@ -8,7 +8,7 @@ namespace LD47
 	{
 		public void OnInteract(GameObject interactingObject)
 		{
-			PCPlayState.isInteractedWith = true;
+			PCController.Instance.PlayingOnPC = true;
 			Debug.Log("Start Minigame");
 		}
 	}
