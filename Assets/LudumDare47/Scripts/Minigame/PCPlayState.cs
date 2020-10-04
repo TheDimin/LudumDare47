@@ -10,7 +10,8 @@ namespace LD47
             public MinigameController minigame;
             private GameObject playUI;
             
-            public override void OnEnterState() {
+            public override void OnEnterState()
+            {
                 pcUI = GameObject.FindObjectOfType<PCUiController>();
                 minigame = new MinigameController();
                 
@@ -25,13 +26,9 @@ namespace LD47
                 minigame.Update();
             }
 
-            public override bool CanEnter(StateBase currentStateBase) {
-                return true;
-            }
+            public override bool CanEnter(StateBase currentStateBase) => PCController.Instance.PlayingOnPC;
 
-            public override bool CanExit() {
-                return false;
-            }
+            public override bool CanExit() => Input.GetKey(KeyCode.F1);
         }
     }
 }

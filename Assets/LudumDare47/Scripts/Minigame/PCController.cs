@@ -11,7 +11,8 @@ namespace LD47
         public class PCController : Singleton<PCController>
         {
             public StateManagerBase<PCState> pcStateManager;
-            
+            public bool PlayingOnPC = false;
+
             private void Start() {
                 pcStateManager = new StateManagerBase<PCState>();
                 pcStateManager.RegisterState(new PCIdleState());
