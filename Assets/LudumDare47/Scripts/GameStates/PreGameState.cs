@@ -24,11 +24,6 @@ namespace LD47.GameStates
             SceneManager.UnloadSceneAsync(1);
         }
 
-        public void EnterGame()
-        {
-            canTransAction = true;
-        }
-
         public override bool CanEnter(StateBase currentStateBase)
         {
             return currentStateBase == null;
@@ -37,6 +32,11 @@ namespace LD47.GameStates
         public override bool CanExit()
         {
             return canTransAction;
+        }
+
+        public void EnterGame()
+        {
+            canTransAction = true;
         }
     }
 }
