@@ -13,12 +13,12 @@ namespace LD47.GameStates
         {
             if (pcState == null)
                 pcState = PCController.Instance.pcStateManager;
-            
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
             gameManager.Player.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.SetActive(false);
-
+            ConveyorBelt.Instance.AttachDefaultObject();
         }
 
         public override void OnExitState()
