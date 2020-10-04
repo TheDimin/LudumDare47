@@ -14,6 +14,19 @@
       "dependencies": {},
       "hash": "2370a58dc0ac0d40337569c5c27bd6ac5fc83839"
     },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.cinemachine": {
+      "version": "2.6.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.collab-proxy": {
       "version": "1.3.9",
       "depth": 0,

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JimTheKiwifruit;
 using NaughtyAttributes;
 using UnityEngine;
 
 
-public class ConveyorBelt : MonoBehaviour
+public class ConveyorBelt : Singleton<ConveyorBelt>
 {
     [Header("Auto")]
     [SerializeField] private GameObject ConveyorBeltObject = null;
@@ -28,9 +29,11 @@ public class ConveyorBelt : MonoBehaviour
     private static readonly int SpeedMatProp = Shader.PropertyToID("Vector1_EA6D7116");
     public float speed { get; private set; } = 1;
 
-    private void Awake()
+    protected override void Awake()
     {
-        SetSpeed(speed);//
+        base.Awake();
+
+        SetSpeed(speed);
 
         ValidateVariables();
         if (hitTransform == null)
@@ -91,7 +94,7 @@ public class ConveyorBelt : MonoBehaviour
         SetSpeed(1);
     }
 
-    [SerializeField] private GameObject spawnGameObject;
+    [SerializeField] private GameObject spawnGameObject = null;
     [Button()]
     private void AddTestObject()
     {
@@ -179,6 +182,7 @@ public class ConveyorBelt : MonoBehaviour
 
 
         attachedObjects.Add(obj);
+        obj.GetComponent<Rigidbody>().isKinematic = true;
         obj.transform.SetParent(transform);
         obj.transform.localPosition = AttachPoint.localPosition;
 
