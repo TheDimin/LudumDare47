@@ -40,9 +40,6 @@ namespace LD47
 
 				ringConnectors[2] = GameObject.Find("Ring3Connector").transform;
 				ringConnectors[2].Rotate(0,0,Random.Range(0,360));
-
-				PCController.score = 0;
-				PCController.stage = 0;
 			}
 
 			public void Update() {

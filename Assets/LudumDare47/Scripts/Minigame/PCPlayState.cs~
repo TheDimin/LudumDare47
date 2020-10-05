@@ -25,7 +25,10 @@ namespace LD47
 
             public override void OnExitState() {
                 playUI.SetActive(false);
- 
+
+                PCController.score = minigame.get_game_score();
+                PCController.stage = minigame.get_game_stage();
+                
                 Debug.Log("yeeeeeeeeeeeeeeet");
             }
 
@@ -38,7 +41,7 @@ namespace LD47
             }
             
             public override bool CanExit() {
-                return minigame.get_game_score() >= 3 || minigame.get_game_stage() >= 3;
+                return minigame.get_game_score() == 3 || minigame.get_game_stage() == 3;
             }
         }
     }
